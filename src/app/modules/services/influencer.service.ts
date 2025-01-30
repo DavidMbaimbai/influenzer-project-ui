@@ -12,7 +12,7 @@ export class InfluencerService {
   baseAPIUrl = '';
 
   constructor(private http: HttpClient) {
-    this.baseAPIUrl = 'https://mysql-ng8g-production.up.railway.app/api/v1'
+    this.baseAPIUrl = 'https://influenzer-project-server-production.up.railway.app/api/v1'
   }
 
   createSpecificInfluencer(

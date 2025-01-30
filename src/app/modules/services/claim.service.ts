@@ -11,7 +11,7 @@ export class ClaimService {
   baseAPIUrl = '';
 
   constructor(private http: HttpClient) {
-    this.baseAPIUrl = 'https://mysql-ng8g-production.up.railway.app/api/v1';
+    this.baseAPIUrl = 'https://influenzer-project-server-production.up.railway.app/api/v1';
   }
   getClaimsByInfluencerId(influencerId: string): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(
