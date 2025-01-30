@@ -1,0 +1,53 @@
+<section class="">
+  <div class="container">
+    <div class="admin-padding flex flex-col gap-[2rem]">
+      <div class="flex flex-col gap-[0.5rem]">
+        <h3 class="heading-text text-white">Influencer Trust Leaderboard</h3>
+        <p class="paragraph-text text-gray">
+          Real-time rankings of health influencers based on scienfic accuracy,
+          credibility, and transperancy. Updated daily using AI-powered analysis
+        </p>
+      </div>
+      <div class="grid grid-cols-3 gap-[2rem]">
+        @for(item of statsList;track $index){
+        <app-admin-stats-card [item]="item"></app-admin-stats-card>
+        }
+      </div>
+
+      <div class="flex flex-col gap-[2rem]">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-[1rem]">
+            @for(item of categoryFilterList;track $index){
+            <app-btn
+              [name]="item.name"
+              [url]="''"
+              [btnIconCss]="''"
+              [btnCss]="
+                'py-[0.5rem] px-[1rem] text-white paragraph-text rounded-full ' +
+                (selectedCatName == item.name.toLowerCase()
+                  ? 'bg-secondary'
+                  : 'bg-teitary')
+              "
+              (onBtnEmitter)="onCatFilterClickHandler(item.name)"
+            ></app-btn>
+            }
+          </div>
+          <div>
+            <app-btn
+              [name]="'Highest First'"
+              [url]="''"
+              [btnIconCss]="'fa-solid fa-arrow-right-arrow-left'"
+              [btnCss]="
+                'py-[0.5rem] px-[1rem] text-white paragraph-text rounded-full flex items-center gap-[0.25rem] bg-teitary '
+              "
+              (onCatFilterEmitter)="onOrderBYHandler()"
+            ></app-btn>
+          </div>
+        </div>
+        <div>
+          <app-admin-table></app-admin-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

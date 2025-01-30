@@ -1,0 +1,23 @@
+<section class="admin-padding">
+  <div class="container">
+    <div class="flex flex-col gap-[1rem]">
+      <app-page-header
+        [pageHeaderData]="pageHeaderData"
+        [title]="'Influencer Detail Page'"
+      ></app-page-header>
+    </div>
+  </div>
+  <section class="">
+    <div class="container">
+      <div class="admin-padding flex flex-col gap-[2rem]">
+        <app-influencer-detail-heading
+          [influencer]="influencerObj"
+        ></app-influencer-detail-heading>
+        <app-influencer-claim-tb
+          [categoryFilterList]="categoryFilterList"
+          [statsList]="statsList"
+        ></app-influencer-claim-tb>
+      </div>
+    </div>
+  </section>
+</section>

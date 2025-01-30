@@ -1,0 +1,110 @@
+<section class="h-screen bg-primary">
+  <div class="container h-full px-6 py-24">
+    <div
+      class="flex h-full flex-wrap items-center justify-center lg:justify-between"
+    >
+      <div class="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
+        <img src="/assets/signin.svg" class="w-full" alt="Phone image" />
+      </div>
+
+      <div class="md:w-8/12 lg:ms-6 lg:w-5/12">
+        <form [formGroup]="signinForm" class="flex flex-col gap-[1rem]">
+          <app-input
+            [labelCss]="'heading-text text-[1rem] text-white'"
+            [label]="'Email address'"
+            [iconCss]="''"
+            [iconClass]="''"
+            [type]="'text'"
+            [control]="$any(signinForm.get('email'))"
+            [placeholder]="''"
+            [inputCss]="
+              'py-[0.5rem] md:py-[0.6rem] pl-[0.5rem] pr-[0.5rem] paragraph-text text-white outline-none bg-primary border-none ring-[1px] ring-gray w-full'
+            "
+            [inputTipLabel]="''"
+          ></app-input>
+
+          <app-input
+            [labelCss]="'heading-text text-[1rem] text-white'"
+            [label]="'Password'"
+            [iconCss]="''"
+            [iconClass]="''"
+            [type]="'password'"
+            [control]="$any(signinForm.get('password'))"
+            [placeholder]="''"
+            [inputCss]="
+              'py-[0.5rem] md:py-[0.6rem] pl-[0.5rem] pr-[0.5rem] paragraph-text text-white outline-none bg-primary border-none ring-[1px] ring-gray w-full'
+            "
+            [inputTipLabel]="''"
+          ></app-input>
+
+          <div class="mb-6 flex items-center justify-end">
+            <app-btn
+              [btnCss]="'text-secondary hover:underline transition'"
+              [btnIconCss]="''"
+              [name]="'Forgot password?'"
+              [url]="''"
+              (onBtnEmitter)="onForgotPasswordHandler('fogotPassword')"
+            ></app-btn>
+          </div>
+
+          <app-btn
+            [btnCss]="
+              'w-full bg-secondary text-white py-[0.5rem] px-[1rem] transition'
+            "
+            [btnIconCss]="'fa-solid fa-plus'"
+            [name]="'Sign in'"
+            [url]="''"
+            (onBtnEmitter)="signinBtnHandler('sign Reasearch')"
+          ></app-btn>
+
+          <div
+            class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray after:mt-0.5 after:flex-1 after:border-t after:border-gray"
+          >
+            <p
+              class="mx-4 mb-0 text-center paragraph-text tex-[1.5rem text-white"
+            >
+              OR
+            </p>
+          </div>
+
+          <a
+            class="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2"
+            style="background-color: #3b5998"
+            href="#!"
+            role="button"
+            data-twe-ripple-init
+            data-twe-ripple-color="light"
+          >
+            <span
+              class="me-2 fill-white [&>svg]:mx-auto [&>svg]:h-3.5 [&>svg]:w-3.5"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                <path
+                  d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"
+                />
+              </svg>
+            </span>
+            Continue with Facebook
+          </a>
+          <a
+            class="mb-3 flex w-full items-center justify-center rounded bg-info px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-info-3 transition duration-150 ease-in-out hover:bg-info-accent-300 hover:shadow-info-2 focus:bg-info-accent-300 focus:shadow-info-2 focus:outline-none focus:ring-0 active:bg-info-600 active:shadow-info-2"
+            style="background-color: #55acee"
+            href="#!"
+            role="button"
+            data-twe-ripple-init
+            data-twe-ripple-color="light"
+          >
+            <span class="me-2 fill-white [&>svg]:h-3.5 [&>svg]:w-3.5">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path
+                  d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
+                />
+              </svg>
+            </span>
+            Continue with X
+          </a>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,38 @@
+<div class="flex flex-col gap-[0.5rem]">
+  <label [class]="labelCss">{{ label }}</label>
+  <div class="relative flex items-center">
+    @if(iconCss){<span (click)="onIconClickHandler()" [class]="iconClass">
+      <i [class]="iconCss"></i> </span
+    >}
+    <input
+      autocomplete="false"
+      [class]="inputCss"
+      [type]="type"
+      [formControl]="control"
+      [placeholder]="placeholder"
+      (keydown.enter)="addItemByEnterKeyHandler(control.value)"
+    />
+  </div>
+  @if(!displayErrors() && inputTipLabel){
+  <span class="paragraph-text text-gray">{{ inputTipLabel }}</span>
+  } @if(displayErrors()){<ng-container>
+    @if(control.errors?.['required']){
+    <div class="paragraph-text !text-danger transition">
+      {{ label }} is required
+    </div>
+    } @if(control.errors?.['email']){
+    <div class="paragraph-text !text-danger transition">
+      {{ label }} should be valid email address
+    </div>
+    } @if(control.errors?.['minlength']){
+    <div class="paragraph-text !text-danger transition">
+      {{ label }} {{ control.errors?.['minlength'].actualLength }} but must be
+      at least {{ control.errors?.['minlength']?.requiredLength }}
+    </div>
+    @if(control.hasError('pattern')){
+    <div class="paragraph-text !text-danger transition">
+      {{ label }} should be number only
+    </div>
+    } } </ng-container
+  >}
+</div>

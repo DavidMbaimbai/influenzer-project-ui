@@ -1,0 +1,30 @@
+<header class="bg-primary h-[4rem]">
+  <div class="container">
+    <div class="py-[1rem] flex items-center justify-between">
+      <app-logo></app-logo>
+      <div>
+        <ul class="flex items-center gap-[1rem]">
+          <li>
+            <button
+              class="link-item flex items-center gap-[0.25rem]"
+              routerLink="/admin/leaderborad"
+            >
+              <span>Go to Admin Panel</span>
+            </button>
+          </li>
+          <li>
+            <button
+              class="link-item flex items-center gap-[0.25rem]"
+              routerLink="/auth/signin"
+            >
+              <span class="fa-solid fa-right-from-bracket"></span>
+              <span>Sign in</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<router-outlet />

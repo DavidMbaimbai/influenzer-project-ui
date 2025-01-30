@@ -1,0 +1,288 @@
+<div
+  class="relative admin-padding px-[2rem] bg-teitary border-[1px] border-gray rounded-md flex flex-col gap-[2rem]"
+>
+  <div
+    [class]="
+      'absolute top-0 left-0  bg-primary/50 z-index-1000 transition ' +
+      (btnLoading ? 'w-full h-full' : 'w-0 h-0')
+    "
+  ></div>
+  <div class="flex flex-col gap-[1rem]">
+    <app-title
+      [iconClass]="'text-secondary text-[1rem]'"
+      [iconCss]="'fa-solid fa-gear'"
+      [tittle]="'Research Configuration'"
+      [tittleCss]="'heading-text text-[1rem] text-white'"
+    ></app-title>
+    <div class="flex items-center gap-[1rem]">
+      <div class="w-[50%]">
+        <app-tab-select-btn
+          [btnCss]="
+            'w-full px-[1rem] py-[1rem] rounded-md overflow-hidden ' +
+            (0 == selectedMainTabIndex
+              ? 'bg-secondary/10 border-[1px] border-secondary'
+              : 'border-[1px] border-gray')
+          "
+          [name]="'Specific Influencer'"
+          [nameCss]="'heading-text text-[1rem] text-white capitalize'"
+          [descriptionCss]="'paragraph-text text-gray'"
+          [description]="'Research a known health influencer by name'"
+          [isDotted]="0 == selectedMainTabIndex ? true : false"
+          [dotCss]="'w-[0.8rem] h-[0.8rem] bg-secondary rounded-full'"
+          [selectedTabIndex]="selectedMainTabIndex"
+          (onSelectTabEmitter)="onMainTabNavSelectedHandler('', 0)"
+        ></app-tab-select-btn>
+      </div>
+
+      <div class="w-[50%]">
+        <app-tab-select-btn
+          [btnCss]="
+            'w-full px-[1rem] py-[1rem] rounded-md overflow-hidden ' +
+            (1 == selectedMainTabIndex
+              ? 'bg-secondary/10 border-[1px] border-secondary'
+              : 'border-[1px] border-gray')
+          "
+          [name]="'Discover New'"
+          [nameCss]="'heading-text text-[1rem] text-white capitalize'"
+          [descriptionCss]="'paragraph-text text-gray'"
+          [description]="'Find and analyze new health influencers'"
+          [isDotted]="1 == selectedMainTabIndex ? true : false"
+          [dotCss]="'w-[0.8rem] h-[0.8rem] bg-secondary rounded-full'"
+          [selectedTabIndex]="selectedMainTabIndex"
+          (onSelectTabEmitter)="onMainTabNavSelectedHandler('', 1)"
+        ></app-tab-select-btn>
+      </div>
+    </div>
+  </div>
+  @if(0 == selectedMainTabIndex){
+  <form [formGroup]="researchConfigForm" class="flex flex-col gap-[1rem]">
+    <div class="flex flex-col md:flex-row gap-[1rem]">
+      <div class="w-full md:w-[50%] flex flex-col gap-[1rem]">
+        <div class="flex flex-col gap-[1rem]">
+          <app-title
+            [iconClass]="''"
+            [iconCss]="''"
+            [tittle]="'Time range'"
+            [tittleCss]="'heading-text text-[1rem] text-white'"
+          ></app-title>
+
+          <div class="grid grid-cols-2 gap-[1rem]">
+            @for(item of timeRangeList;track $index;let i =$index){
+            <app-tab-select-btn
+              [btnCss]="
+                'w-full px-[1rem] py-[0.5rem] rounded-md overflow-hidden ' +
+                (i == selectedTimeRangeIndex
+                  ? 'bg-secondary/10 border-[1px] border-secondary'
+                  : 'border-[1px] border-gray')
+              "
+              [name]="item.name"
+              [nameCss]="'paragraph-text text-gray capitalize'"
+              [descriptionCss]="''"
+              [description]="''"
+              [isDotted]="i == selectedTimeRangeIndex ? true : false"
+              [dotCss]="'w-[0.8rem] h-[0.8rem] bg-secondary rounded-full'"
+              [selectedTabIndex]="selectedTimeRangeIndex"
+              (onSelectTabEmitter)="onTimeRangeSelectedHandler(item.name, i)"
+            ></app-tab-select-btn>
+            }
+          </div>
+        </div>
+        <div class="flex flex-col gap-[1rem]">
+          <app-input
+            [labelCss]="'heading-text text-[1rem] text-white'"
+            [label]="'Influencer Name'"
+            [iconCss]="'fa-solid fa-magnifying-glass'"
+            [iconClass]="
+              'text-[1rem] text-white absolute left-[0.5rem] my-auto'
+            "
+            [type]="'text'"
+            [control]="$any(researchConfigForm.get('influencerName'))"
+            [placeholder]="'Enter Influencer name'"
+            [inputCss]="
+              'py-[0.5rem] md:py-[0.6rem] pl-[2rem] pr-[0.5rem] paragraph-text text-white outline-none bg-primary border-none ring-[1px] ring-gray w-full overflow-hidden rounded-sm  md:rounded-md'
+            "
+            [inputTipLabel]="''"
+          ></app-input>
+          <app-input
+            [labelCss]="'heading-text text-[1rem] text-white'"
+            [label]="'Claims To Analyze per Influencer'"
+            [iconCss]="''"
+            [iconClass]="''"
+            [type]="'text'"
+            [control]="$any(researchConfigForm.get('claimsToAnalyzeCount'))"
+            [placeholder]="'Enter number claims to anayze per influencer'"
+            [inputCss]="
+              'py-[0.5rem] md:py-[0.6rem] pl-[0.5rem] pr-[0.5rem] paragraph-text text-white outline-none bg-primary border-none ring-[1px] ring-gray w-full overflow-hidden rounded-sm  md:rounded-md'
+            "
+            [inputTipLabel]="
+              'Recommended 50-100 claims for comprehensive analysis'
+            "
+          ></app-input>
+        </div>
+      </div>
+      <div class="w-full md:w-[50%]">
+        <div class="flex flex-col gap-[1rem]">
+          <app-input
+            [labelCss]="'heading-text text-[1rem] text-white'"
+            [label]="'Products to Find Per Influencer'"
+            [iconCss]="''"
+            [iconClass]="''"
+            [placeholder]="'Enter number of products to find per Influencer'"
+            [type]="'text'"
+            [control]="
+              $any(researchConfigForm.get('productsToFindPerInfluencerCount'))
+            "
+            [placeholder]="''"
+            [inputCss]="
+              'py-[0.5rem] md:py-[0.6rem] pl-[0.5rem] pr-[0.5rem] paragraph-text text-white outline-none bg-primary border-none ring-[1px] ring-gray w-full overflow-hidden rounded-sm  md:rounded-md'
+            "
+            [inputTipLabel]="'Set to 0 to skip research'"
+          ></app-input>
+
+          <div class="flex flex-col gap-[1rem]">
+            <div class="flex justify-between items-center">
+              <app-influencer-setting-option-card
+                [item]="influencerSettingOptionList[0]"
+              ></app-influencer-setting-option-card>
+              <app-toggle-btn
+                [id]="
+                  influencerSettingOptionList[0].name.trim() +
+                  '_' +
+                  influencerSettingOptionList[0].id
+                "
+                (onToggleEmitter)="onToggleRevenueAnaylsisBtnHandler()"
+              ></app-toggle-btn>
+            </div>
+
+            <div class="flex justify-between items-center">
+              <app-influencer-setting-option-card
+                [item]="influencerSettingOptionList[1]"
+              ></app-influencer-setting-option-card>
+              <app-toggle-btn
+                [id]="
+                  influencerSettingOptionList[1].name.trim() +
+                  '_' +
+                  influencerSettingOptionList[1].id
+                "
+                (onToggleEmitter)="onToggleVerifyScientificBtnHandler()"
+              ></app-toggle-btn>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-[1rem]">
+      <div class="flex items-center justify-between">
+        <app-title
+          [iconClass]="''"
+          [iconCss]="''"
+          [tittle]="'Scientific Journals'"
+          [tittleCss]="'heading-text text-[1rem] text-white'"
+        ></app-title>
+        <div class="flex items-center divide-x-[1px] divide-gray">
+          <app-btn
+            [btnCss]="'text-secondary pr-[0.5rem] hover:underline transition'"
+            [btnIconCss]="''"
+            [name]="'Select All'"
+            [url]="''"
+            (onBtnEmitter)="selectAllJornalHandler('select all')"
+          ></app-btn>
+          <app-btn
+            [btnCss]="'pl-[0.5rem] text-secondary hover:underline transition'"
+            [btnIconCss]="''"
+            [name]="'Deselect All'"
+            [url]="''"
+            (onBtnEmitter)="deSelectAllJornalHandler('deselect all')"
+          ></app-btn>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-[1rem]">
+        @for(item of scientificJournalList;track $index;let i=$index){
+        <app-tab-select-btn
+          [btnCss]="
+            'w-full px-[1rem] py-[0.5rem] rounded-md overflow-hidden ' +
+            (item.selected
+              ? 'bg-secondary/10 border-[1px] border-secondary'
+              : 'border-[1px] border-gray')
+          "
+          [name]="item.name"
+          [nameCss]="'paragraph-text text-[1rem] text-white capitalize'"
+          [descriptionCss]="''"
+          [description]="''"
+          [isDotted]="item.selected ? true : false"
+          [dotCss]="'w-[0.8rem] h-[0.8rem] bg-secondary rounded-full'"
+          [selectedTabIndex]="selectedSciJournalIndex"
+          (onSelectTabEmitter)="onSciJournalSelectedHandler(item, i)"
+        ></app-tab-select-btn>
+        } @if(isAddedScientificJournalItem){
+        <app-input
+          [labelCss]="''"
+          [label]="''"
+          [iconCss]="'fa-solid fa-xmark'"
+          [iconClass]="
+            'text-danger text-[1rem] cursor-pointer absolute right-[0.5rem]'
+          "
+          (onIconClickEmitter)="onRemoveAddJornalInputHandler()"
+          [type]="'text'"
+          [control]="addScientificJournalInput"
+          (addItemByEnterKeyEmitter)="
+            onAddItemByEnterKeyHandler(addScientificJournalInput.value)
+          "
+          [placeholder]="'Type Scientific Journal'"
+          [inputCss]="
+            'py-[0.5rem] md:py-[0.6rem] pl-[0.5rem] pr-[2.5rem] paragraph-text text-white outline-none bg-primary border-none ring-[1px] ring-gray w-full overflow-hidden rounded-sm  md:rounded-md'
+          "
+          [inputTipLabel]="'Type a message and press Enter'"
+        ></app-input>
+        }
+      </div>
+      @if(!isAddedScientificJournalItem){
+      <div>
+        <app-btn
+          [btnCss]="'text-secondary hover:underline transition'"
+          [btnIconCss]="'fa-solid fa-plus'"
+          [name]="'Add new Journal'"
+          [url]="''"
+          (onBtnEmitter)="addNewJornalHandler('Add new journal')"
+        ></app-btn>
+      </div>
+      }
+      <div>
+        <app-textarea-ui
+          [textAreaCss]="
+            'py-[0.5rem] md:py-[0.6rem]  px-[0.5rem] rounded-md paragraph-text text-white outline-none bg-primary border-none ring-[1px] ring-gray w-full'
+          "
+          [control]="$any(researchConfigForm.get('researchNotes'))"
+          [label]="'Notes for Research assistant'"
+          [labelCss]="'heading-text text-[1rem] text-white'"
+          [placeholder]="'Add any specific instructions or forcus areas...'"
+          [rows]="5"
+          [textAreaTipLabel]="''"
+        ></app-textarea-ui>
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="">
+          <p class="paragraph-text text-gray text-[0.8rem]">
+            Note fields (<span class="text-danger">*</span>) are required
+          </p>
+        </div>
+        <!-- fa-solid fa-plus -->
+        <app-btn
+          [btnCss]="
+            'bg-secondary text-white py-[0.5rem] px-[1rem] overflow-hidden rounded-sm  md:rounded-md transition'
+          "
+          [btnLoading]="btnLoading"
+          [btnIconCss]="''"
+          [name]="'Start Research'"
+          [url]="''"
+          (onBtnEmitter)="startResearchHandler('start Reasearch')"
+        ></app-btn>
+      </div>
+    </div>
+  </form>
+  } @if(1 == selectedMainTabIndex){
+  <div>
+    <h3 class="heading-text text-white text-[1rem]">Discover new Form</h3>
+  </div>
+  }
+</div>

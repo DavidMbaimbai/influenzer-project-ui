@@ -1,0 +1,79 @@
+<div class="bg-teitary relative overflow-x-auto rounded-md">
+  <table class="w-full text-left rtl:text-right border border-gray">
+    <thead class="paragraph-text text-gray uppercase">
+      <tr class="border-b border-gray">
+        <th scope="col" class="px-6 py-3">Rank</th>
+        <th scope="col" class="px-6 py-3">Influencer</th>
+        <th scope="col" class="px-6 py-3">Category</th>
+        <th scope="col" class="px-6 py-3">Trust score</th>
+        <th scope="col" class="px-6 py-3">Trend</th>
+        <th scope="col" class="px-6 py-3">Followers</th>
+        <th scope="col" class="px-6 py-3">verified claims</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr class="border-b border-gray paragraph-text text-white">
+        <td class="px-6 py-4">1</td>
+        <td class="px-6 py-4">
+          <app-influencer-table-card
+            [fullName]="'Dr. Petter Attla'"
+            [imgUrl]="'/assets/influencers/user-2.jpg'"
+          ></app-influencer-table-card>
+        </td>
+        <td class="px-6 py-4">Medicine</td>
+        <td class="px-6 py-4">94%</td>
+        <td class="px-6 py-4">
+          <app-trend-table-card [isTrending]="true"></app-trend-table-card>
+        </td>
+        <td class="px-6 py-4">1.2M</td>
+        <td class="px-6 py-4">203</td>
+      </tr>
+      <tr class="border-b border-gray paragraph-text text-white">
+        <td class="px-6 py-4">1</td>
+        <td class="px-6 py-4">
+          <app-influencer-table-card
+            [fullName]="'Dr. Petter Attla'"
+            [imgUrl]="'/assets/influencers/user-1.jpg'"
+          ></app-influencer-table-card>
+        </td>
+        <td class="px-6 py-4">Medicine</td>
+        <td class="px-6 py-4">94%</td>
+        <td class="px-6 py-4">
+          <app-trend-table-card [isTrending]="false"></app-trend-table-card>
+        </td>
+        <td class="px-6 py-4">1.2M</td>
+        <td class="px-6 py-4">203</td>
+      </tr> -->
+
+      @for(item of influencerList;track $index;let last=$last;){
+      <tr
+        [routerLink]="['/admin/influencers/', item.id]"
+        routerLinkActive="bg-primary"
+        [class]="
+          'paragraph-text text-white cursor-pointer ' +
+          (!last ? 'border-b border-gray' : '')
+        "
+      >
+        <td class="px-6 py-4">{{ $index + 1 }}</td>
+        <td class="px-6 py-4">
+          <app-influencer-table-card
+            [fullName]="
+              item.tittle + '. ' + item.firstName + ' ' + item.lastName
+            "
+            [imgUrl]="'/assets/influencers/user-3.jpeg'"
+          ></app-influencer-table-card>
+        </td>
+        <td class="px-6 py-4">{{ item.category }}</td>
+        <td class="px-6 py-4">{{ item.trustScore }}</td>
+        <td class="px-6 py-4">
+          <app-trend-table-card
+            [isTrending]="item.trending"
+          ></app-trend-table-card>
+        </td>
+        <td class="px-6 py-4">{{ item.followersCount }}</td>
+        <td class="px-6 py-4">{{ item.verifiedClaimsCount }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

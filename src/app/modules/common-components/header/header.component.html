@@ -1,0 +1,30 @@
+<header class="bg-primary h-[4rem]">
+  <div class="container">
+    <div class="py-[1rem] flex items-center justify-between">
+      <app-logo></app-logo>
+      <div>
+        <ul class="flex items-center gap-[1rem]">
+          @for(item of menuList;track $index){
+          <li>
+            <a
+              class="link-item capitalize"
+              [routerLink]="['/admin/' + item.url]"
+              [routerLinkActive]="'underline text-secondary'"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              {{ item.name }}
+            </a>
+          </li>
+
+          }
+          <li>
+            <button (click)="onLogoutHandler()" class="link-item flex items-center gap-[0.25rem]">
+              <span class="fa-solid fa-right-from-bracket"></span>
+              <span>Sign out</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
